@@ -1,0 +1,14 @@
+{
+     "Comment": "Creating Alias resource record sets in Route 53",
+     "Changes": [{
+                "Action": "CREATE",
+                "ResourceRecordSet": {
+                            "Name": "ekstodoapp.tk.",
+                            "Type": "A",
+                            "AliasTarget":{
+                                    "HostedZoneId": "{{ LoadBalancerDescriptions[0].CanonicalHostedZoneNameID }}",
+                                    "DNSName": "dualstack.{{ LoadBalancerDescriptions[0].DNSName }}",
+                                    "EvaluateTargetHealth": false
+                              }}
+                          }]
+}

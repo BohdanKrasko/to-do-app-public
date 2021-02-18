@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: dashboard-ingres
+spec:
+  rules:
+  - host: ekstodoapp.tk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-to-do
+          servicePort: 80

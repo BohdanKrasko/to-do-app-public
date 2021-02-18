@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-to-do-deployment
+  labels:
+    app: todo
+    tier: frontend-to-do
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+      tier: frontend-to-do
+  template:
+    metadata:
+      labels:
+        app: todo
+        tier: frontend-to-do
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: frontend-to-do
+          image: {{ .Values.imageName }}
+          ports:
+            - containerPort: 80

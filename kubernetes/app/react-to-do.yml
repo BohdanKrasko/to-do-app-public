@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-to-do-deployment
+  labels:
+    app: todo
+    tier: frontend-to-do
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+      tier: frontend-to-do
+  template:
+    metadata:
+      labels:
+        app: todo
+        tier: frontend-to-do
+    spec:
+      containers:
+        - name: frontend-to-do
+          image: kraskobohdan/to-do-app:nice
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-to-do
+spec:
+  selector:
+    app: todo
+    tier: frontend-to-do
+  #type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

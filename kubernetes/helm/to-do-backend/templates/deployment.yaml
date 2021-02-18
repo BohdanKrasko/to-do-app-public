@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-to-do-deployment
+  labels:
+    app: todo
+    tier: backend-to-do
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+      tier: backend-to-do
+  template:
+    metadata:
+      labels:
+        app: todo
+        tier: backend-to-do
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: backend-to-do
+          image: {{ .Values.imageName }}
+          ports:
+            - containerPort: 8080

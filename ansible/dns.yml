@@ -1,0 +1,15 @@
+- name: create A record
+  hosts: localhost
+  gather_facts: no
+  
+  tasks:
+    - name: vars
+      shell: aws elb describe-load-balancers > vars/vars.json
+    - name: include vars
+      include_vars: vars.json
+    - name: create json
+      template:
+        src: record.json.j2
+        dest: record.json
+    - name: add A record
+      shell: aws route53 change-resource-record-sets --hosted-zone-id Z05340611QTGXY4HN6R2I --change-batch file://record.json

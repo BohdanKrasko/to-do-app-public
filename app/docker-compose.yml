@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mongo-go:
+    image: "mongo:4"
+    container_name: "mongo"
+    ports:
+      - "27017:27017"
+    command: mongod --bind_ip mongo
+
+  backend-go:
+    build: go-server
+    container_name: "todo"
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - mongo-go
+  frontend-go:
+    build: client
+    container_name: "reat-app"
+    ports:
+      - "88:80/tcp"
+    depends_on:
+      - backend-go
