@@ -1,0 +1,13 @@
+[
+  {
+    "name": "go",
+    "image": "kraskobohdan/to-do-app:go",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ]
+  }
+]
